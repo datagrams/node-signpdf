@@ -7,13 +7,14 @@ var _exportNames = {
   SignPdf: true,
   SignPdfError: true
 };
+exports.SignPdf = void 0;
 Object.defineProperty(exports, "SignPdfError", {
   enumerable: true,
   get: function () {
     return _SignPdfError.default;
   }
 });
-exports.default = exports.SignPdf = void 0;
+exports.default = void 0;
 
 var _nodeForge = _interopRequireDefault(require("node-forge"));
 
@@ -24,6 +25,7 @@ var _helpers = require("./helpers");
 Object.keys(_helpers).forEach(function (key) {
   if (key === "default" || key === "__esModule") return;
   if (Object.prototype.hasOwnProperty.call(_exportNames, key)) return;
+  if (key in exports && exports[key] === _helpers[key]) return;
   Object.defineProperty(exports, key, {
     enumerable: true,
     get: function () {
@@ -37,6 +39,7 @@ var _const = require("./helpers/const");
 Object.keys(_const).forEach(function (key) {
   if (key === "default" || key === "__esModule") return;
   if (Object.prototype.hasOwnProperty.call(_exportNames, key)) return;
+  if (key in exports && exports[key] === _const[key]) return;
   Object.defineProperty(exports, key, {
     enumerable: true,
     get: function () {
@@ -64,7 +67,7 @@ class SignPdf {
       throw new _SignPdfError.default('PDF expected as Buffer.', _SignPdfError.default.TYPE_INPUT);
     }
 
-    if (!(p12Buffer instanceof Buffer)) {
+    if (typeof p12Buffer !== 'string' || !p12Buffer instanceof Buffer) {
       throw new _SignPdfError.default('p12 certificate expected as Buffer.', _SignPdfError.default.TYPE_INPUT);
     }
 

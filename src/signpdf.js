@@ -31,7 +31,7 @@ export class SignPdf {
                 SignPdfError.TYPE_INPUT,
             );
         }
-        if (!(p12Buffer instanceof Buffer)) {
+        if (typeof p12Buffer !== 'string' || !p12Buffer instanceof Buffer) {
             throw new SignPdfError(
                 'p12 certificate expected as Buffer.',
                 SignPdfError.TYPE_INPUT,
